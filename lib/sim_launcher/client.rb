@@ -6,11 +6,13 @@ module SimLauncher
   class Client
     DEFAULT_SERVER_URI = "http://localhost:8881"
 
-    def initialize( app_path, sdk, family )
+    def initialize( app_path, sdk, family, app_args )
       @app_path = File.expand_path( app_path )
       @sdk = sdk
       @family = family
+      @app_args = app_args
       self.server_uri = DEFAULT_SERVER_URI
+      
     end
 
     def self.for_ipad_app( app_path, sdk = nil )
@@ -65,6 +67,7 @@ module SimLauncher
       full_request_uri.query = "app_path=" + CGI.escape( @app_path )
       full_request_uri.query += "&sdk=" + CGI.escape( @sdk ) unless @sdk.nil?
       full_request_uri.query += "&restart=" + (!!requesting_restart).to_s
+      full_request_uri.query += "&app_args=" + CGI.escape( @app_args ) unless @app_args.nil?
       full_request_uri
     end
 

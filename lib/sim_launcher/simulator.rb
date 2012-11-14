@@ -19,12 +19,12 @@ class Simulator
     run_synchronous_command( :launch, app_path, '--sdk', sdk_version, '--family', device_family, '--exit', *args )
   end
 
-  def launch_ipad_app( app_path, sdk )
-    launch_ios_app( app_path, sdk, 'ipad' )
+  def launch_ipad_app( app_path, sdk, app_args )
+    launch_ios_app( app_path, sdk, 'ipad', app_args )
   end
 
-  def launch_iphone_app( app_path, sdk )
-    launch_ios_app( app_path, sdk, 'iphone' )
+  def launch_iphone_app( app_path, sdk, app_args )
+    launch_ios_app( app_path, sdk, 'iphone', app_args )
   end
 
   def quit_simulator

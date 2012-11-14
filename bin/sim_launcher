@@ -34,9 +34,10 @@ get '/launch_ipad_app' do
 
   sdk = params[:sdk]
   restart_requested = ("true" == params[:restart])
+  app_args = params[:app_args]
   
   shared_simulator.quit_simulator if restart_requested
-  shared_simulator.launch_ipad_app( app_path, sdk )
+  shared_simulator.launch_ipad_app( app_path, sdk, app_args )
 end
 
 get '/launch_iphone_app' do
@@ -45,7 +46,8 @@ get '/launch_iphone_app' do
 
   sdk = params[:sdk]
   restart_requested = ("true" == params[:restart])
+  app_args = params[:app_args]
 
   shared_simulator.quit_simulator if restart_requested
-  shared_simulator.launch_iphone_app( app_path, sdk )
+  shared_simulator.launch_iphone_app( app_path, sdk, app_args )
 end
