@@ -1,6 +1,7 @@
 module SimLauncher
   class DirectClient
     def initialize( app_path, sdk, family, app_args )
+      
       @app_path = File.expand_path( app_path )
       @sdk = sdk
       @family = family
