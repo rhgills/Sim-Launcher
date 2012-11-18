@@ -6,11 +6,12 @@ module SimLauncher
   class Client
     DEFAULT_SERVER_URI = "http://localhost:8881"
 
-    def initialize( app_path, sdk, family, app_args )
+    def initialize( app_path, sdk, family, app_args, other_args = {} )
       @app_path = File.expand_path( app_path )
       @sdk = sdk
       @family = family
       @app_args = app_args
+      @other_args = other_args
       self.server_uri = DEFAULT_SERVER_URI
       
     end
@@ -68,6 +69,10 @@ module SimLauncher
       full_request_uri.query += "&sdk=" + CGI.escape( @sdk ) unless @sdk.nil?
       full_request_uri.query += "&restart=" + (!!requesting_restart).to_s
       full_request_uri.query += "&app_args=" + CGI.escape( @app_args ) unless @app_args.nil?
+
+      # TODO: SUPPORT PASSING OTHER ARGS HASH (porbably each as a seperate parameter here.)
+      # TODO: SUPPORT HANDLING OTHER ARGS HASH
+
       full_request_uri
     end
 

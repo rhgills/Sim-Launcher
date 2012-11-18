@@ -2,11 +2,13 @@ PATH
   remote: .
   specs:
     sim_launcher (0.4.6)
+      plist
       sinatra
 
 GEM
   remote: http://rubygems.org/
   specs:
+    plist (3.1.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
