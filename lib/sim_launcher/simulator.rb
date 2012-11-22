@@ -34,7 +34,7 @@ class Simulator
     
     applications_root = File.expand_path("~/Library/Application Support/iPhone Simulator/#{sdk_version}/Applications")
     
-    installed_app_directory_path = nil
+    path = nil
     other_app_path = nil
     
     fail "Directory at #{applications_root} doesn't exist." if Dir.exists?(applications_root) == false
@@ -60,15 +60,15 @@ class Simulator
       if other_app_path
          other_bundle_identifier = bundle_identifier_for_app_bundle(other_app_path)
          if other_bundle_identifier == bundle_identifier
-            installed_app_directory_path = random_id_directory_path
+            path = random_id_directory_path
             break
           end
       end
    end
  
     
-    return installed_app_directory_path if installed_app_directory_path
-    return installed_app_directory_path if !other_args[:launch_app_and_retry_if_not_found]
+    return path if path
+    return path if !other_args[:launch_app_and_retry_if_not_found]
     
     # we didn't find the app_directory. It's likely the app hasn't been launched in the simulator yet, so there is none. Launch it and then close it to create the directory, and try again.
     
