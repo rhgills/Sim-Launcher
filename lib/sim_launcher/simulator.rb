@@ -127,14 +127,17 @@ class Simulator
     sdk_version ||= SdkDetector.new(self).latest_sdk_version
     args = ["--args"] + app_args.flatten if app_args
     
-    defaults = path_to_defaults(sdk_version, app_path)
-    
-    should_clear_defaults = other_args[:clear_defaults]
-    clear_defaults(defaults) if( should_clear_defaults ) 
+    if( other_args[:clear_defaults] || other_args[:set_defaults ] ) 
+      # we can't just grab path_to_defaults always - if we're called recursively by path_to_defaults because this is the first time the app at app_path is being launched, we'll infinite loop if we call it now.
+      defaults = path_to_defaults(sdk_version, app_path)
+      
+      should_clear_defaults = other_args[:clear_defaults]
+      clear_defaults(defaults) if( should_clear_defaults ) 
 
-    new_defaults = other_args[:set_defaults]
-    if( new_defaults ) 
-      write_defaults(defaults, new_defaults)
+      new_defaults = other_args[:set_defaults]
+      if( new_defaults ) 
+        write_defaults(defaults, new_defaults)
+      end
     end
     
     run_synchronous_command( :launch, app_path, '--sdk', sdk_version, '--family', device_family, '--exit', *args )
