@@ -74,7 +74,7 @@ class Simulator
     
     # assuming that the launch_ios_app command won't return before the directory is created.
     # TODO: test this
-    launch_ios_app(sdk_version, app_path, 'iphone')
+    launch_ios_app(app_path, sdk_version, 'iphone')
     quit_simulator
     
     return installed_app_directory_path(sdk_version, app_path, :launch_app_and_retry_if_not_found => false)
