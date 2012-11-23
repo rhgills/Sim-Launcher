@@ -112,7 +112,11 @@ class Simulator
   end
   
   def clear_defaults(defaults_path)
-     FileUtils.rm(defaults_path)
+     begin 
+       FileUtils.rm(defaults_path)
+     rescue Exception
+       puts "Failed to delete file at defaults_path: #{$!}"
+     end
    end
 
   def launch_ios_app(app_path, sdk_version, device_family, app_args = nil, other_args = {})
